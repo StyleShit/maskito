@@ -47,6 +47,27 @@ describe('Maskito', () => {
 		);
 	});
 
+	it('should unformat a string based on a mask', () => {
+		// Arrange.
+		const { unformat } = createMask('AAA (000)-000');
+
+		// Act.
+		const result = unformat('USA (123)-4');
+
+		// Assert.
+		expect(result).toBe('USA1234');
+	});
+
+	it('should throw when trying to unformat a malformed string', () => {
+		// Arrange.
+		const { unformat } = createMask('AAA (000)-000');
+
+		// Act & Assert.
+		expect(() => unformat('USA (123)-A5')).toThrowError(
+			"Failed to unformat value 'USA (123)-A5' with mask 'AAA (000)-000': Invalid replacement 'A' for placeholder '0' at index 10",
+		);
+	});
+
 	it('should expose the mask', () => {
 		// Arrange.
 		const { mask } = createMask('000');
@@ -64,6 +85,7 @@ describe('Maskito', () => {
 			) => {
 				mask: string;
 				format: (value: string) => string;
+				unformat: (value: string) => string;
 			}
 		>();
 	});

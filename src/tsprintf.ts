@@ -1,6 +1,6 @@
 export type Placeholders = Record<string, RegExp>;
 
-const builtinPlaceholders = {
+export const builtinPlaceholders = {
 	0: /^\d$/,
 	A: /^[A-z]$/,
 } satisfies Placeholders;
