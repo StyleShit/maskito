@@ -39,11 +39,11 @@ describe('Maskito', () => {
 
 	it('should throw when a replacement does not match the placeholder', () => {
 		// Arrange.
-		const { format } = createMask('000');
+		const { format } = createMask('A00');
 
 		// Act & Assert.
 		expect(() => format('USA')).toThrowError(
-			"Failed to format value 'USA' with mask '000': Invalid replacement 'U' for placeholder '0'",
+			"Failed to format value 'USA' with mask 'A00': Invalid replacement 'S' for placeholder '0' at index 1",
 		);
 	});
 

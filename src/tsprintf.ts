@@ -19,10 +19,12 @@ export function tsprintf(
 	let out = '';
 	let replacementIdx = 0;
 
-	for (const char of format) {
+	for (let i = 0; i < format.length; i++) {
 		if (replacementIdx >= replacements.length) {
 			break;
 		}
+
+		const char = format[i] as string;
 
 		if (!(char in placeholders)) {
 			out += char;
@@ -36,7 +38,7 @@ export function tsprintf(
 
 		if (!replacement.match(placeholderRegex)) {
 			throw new Error(
-				`Invalid replacement '${replacement}' for placeholder '${char}'`,
+				`Invalid replacement '${replacement}' for placeholder '${char}' at index ${String(i)}`,
 			);
 		}
 
