@@ -1,12 +1,12 @@
 {
-	"name": "create-typescript-package",
-	"description": "A template project for developing & publishing TypeScript packages",
+	"name": "maskito",
+	"description": "Tiny, zero-dependency, string masking library",
 	"version": "0.0.0",
 	"author": "StyleShit",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/StyleShit/create-typescript-package"
+		"url": "https://github.com/StyleShit/maskito"
 	},
 	"type": "module",
 	"main": "dist/index.cjs",
