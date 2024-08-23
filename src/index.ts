@@ -1,3 +1,2 @@
-export default function helloWorld() {
-	return 'Hello World!';
-}
+export { createMask } from './create-mask';
+export { type Placeholders, tsprintf } from './tsprintf';
