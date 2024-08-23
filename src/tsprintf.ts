@@ -1,9 +1,9 @@
 export type Placeholders = Record<string, RegExp>;
 
-export const builtinPlaceholders = {
+export const builtinPlaceholders = Object.freeze({
 	0: /^\d$/,
 	A: /^[A-z]$/,
-} satisfies Placeholders;
+}) satisfies Placeholders;
 
 // Inspired by PHP's `sprintf`, with slight modifications.
 export function tsprintf(
