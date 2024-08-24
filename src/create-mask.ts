@@ -28,22 +28,18 @@ export function createMask(
 		const maskRegexes = maskToRegexes(mask, placeholders);
 
 		let out = '';
+		let regexIdx = 0;
 
 		for (let i = 0; i < value.length; i++) {
 			const char = value[i] as string;
-			const [placeholder, regex] = maskRegexes.shift() ?? [];
+			const regex = maskRegexes[regexIdx];
 
-			if (!placeholder || !regex) {
+			if (!regex || !char.match(regex)) {
 				continue;
 			}
 
-			if (!char.match(regex)) {
-				throw new Error(
-					`Failed to unformat value '${value}' with mask '${mask}': Invalid replacement '${char}' for placeholder '${placeholder}' at index ${String(i)}`,
-				);
-			}
-
 			out += char;
+			regexIdx++;
 		}
 
 		return out;
@@ -57,13 +53,13 @@ export function createMask(
 }
 
 function maskToRegexes(mask: string, placeholders: Placeholders) {
-	return mask.split('').map<[string, RegExp | null]>((char) => {
+	return mask.split('').reduce<RegExp[]>((acc, char) => {
 		if (char in placeholders) {
 			const regex = placeholders[char] as RegExp;
 
-			return [char, regex];
+			acc.push(regex);
 		}
 
-		return [char, null];
-	});
+		return acc;
+	}, []);
 }

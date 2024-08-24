@@ -52,20 +52,14 @@ describe('Maskito', () => {
 		const { unformat } = createMask('AAA (000)-000');
 
 		// Act.
-		const result = unformat('USA (123)-4');
+		const fullyMasked = unformat('USA (123)-4');
+		const partiallyMasked = unformat('USA(123 4');
+		const unmasked = unformat('USA1234');
 
 		// Assert.
-		expect(result).toBe('USA1234');
-	});
-
-	it('should throw when trying to unformat a malformed string', () => {
-		// Arrange.
-		const { unformat } = createMask('AAA (000)-000');
-
-		// Act & Assert.
-		expect(() => unformat('USA (123)-A5')).toThrowError(
-			"Failed to unformat value 'USA (123)-A5' with mask 'AAA (000)-000': Invalid replacement 'A' for placeholder '0' at index 10",
-		);
+		expect(fullyMasked).toBe('USA1234');
+		expect(partiallyMasked).toBe('USA1234');
+		expect(unmasked).toBe('USA1234');
 	});
 
 	it('should expose the mask', () => {
