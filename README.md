@@ -51,3 +51,35 @@ const { mask } = createMask('AAA (000)-000-000');
 
 console.log(mask); // 'AAA (000)-000-000'
 ```
+
+### Example with React
+
+Here's an example of how you can use Maskito with React:
+
+```TSX
+import { useState } from 'react';
+import { createMask } from 'maskito';
+
+const { format, unformat, mask } = createMask('(000) 000-0000');
+
+const App = () => {
+    const [value, setValue] = useState('');
+
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setValue(unformat(e.target.value));
+    };
+
+    return (
+        <input
+            placeholder={mask}
+            value={format(value)}
+            onChange={onChange}
+        />
+    );
+};
+```
+
+We initialize a mask outside of React's context using the `createMask` function. Then, inside React,
+we render a controlled input that shows the formatted value using the `format` function. Each time
+the user changes the input value, we `unformat` it and set it as the new state's value, resulting in
+a formatted input for the user, but an unformatted value for the application.
