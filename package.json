@@ -1,7 +1,7 @@
 {
 	"name": "maskito",
 	"description": "Tiny, zero-dependency, and extensible string masking library",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"author": "StyleShit",
 	"license": "MIT",
 	"repository": {
